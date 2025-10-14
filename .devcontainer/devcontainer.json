@@ -1,0 +1,59 @@
+{
+    "name": "devcontainer",
+    "dockerComposeFile": "docker-compose.yml",
+    "service": "app",
+    "workspaceFolder": "/workspace",
+    "postCreateCommand": "",
+    "postStartCommand": "",
+    "build": {
+        "options": ["--no-cache"]
+    },
+    "features": {
+        "ghcr.io/devcontainers/features/common-utils:2": {},
+        "ghcr.io/devcontainers/features/git:1": {},
+        "ghcr.io/devcontainers/features/github-cli:1": {}
+    },
+    "customizations": {
+        "vscode": {
+            "settings": {
+                "workbench.colorTheme": "Visual Studio Dark",
+                "terminal.integrated.defaultProfile.linux": "zsh",
+                "terminal.integrated.profiles.linux": {
+                    "zsh": {
+                        "path": "/bin/zsh"
+                    }
+                }
+            },
+            "extensions": [
+                // --
+                "streetsidesoftware.code-spell-checker",
+                "eamodio.gitlens",
+                "mhutchie.git-graph",
+                "naumovs.color-highlight",
+                "shardulm94.trailing-spaces",
+                "mechatroner.rainbow-csv",
+                "christian-kohler.path-intellisense",
+                "kisstkondoros.vscode-gutter-preview",
+                //--
+                "usernamehw.errorlens",
+                "esbenp.prettier-vscode",
+                "dbaeumer.vscode-eslint",
+                "firsttris.vscode-jest-runner",
+                "shd101wyy.markdown-preview-enhanced",
+                // IA
+                "Continue.continue"
+            ]
+        },
+        "settings": {
+            "workbench.colorTheme": "Default Dark Modern",
+            "editor.defaultFormatter": "esbenp.prettier-vscode",
+            "material-icon-theme.enableLogging": true
+        }
+    },
+    "forwardPorts": [
+        3000
+    ],
+    "hostRequirements": {
+        "gpu": true
+    }
+}

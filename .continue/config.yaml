@@ -1,0 +1,33 @@
+name: "Mi Configuración repo"
+version: "1"
+
+models:
+  - name: Qwen3-Coder-30B-A3B-Instruct
+    provider: openai
+    model: Qwen3-Coder-30B-A3B-Instruct
+    apiBase: http://ia:8080/v1
+    completionType: completion
+    capabilities:
+      - tool_use
+    streaming: true
+    roles:
+      - chat
+      # - embed
+      - edit
+      - apply
+
+context:
+  - provider: file
+  - provider: code
+  - provider: diff
+  - provider: currentFile
+  - provider: terminal
+  - provider: open
+    params:
+      onlyPinned: true
+  - provider: clipboard
+  - provider: tree
+  - provider: problems
+  - provider: docs
+  - provider: folder
+  - provider: codebase
