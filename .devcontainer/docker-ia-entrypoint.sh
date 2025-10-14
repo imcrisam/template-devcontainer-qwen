@@ -8,7 +8,8 @@ MODEL_URL="https://huggingface.co/unsloth/Qwen3-Coder-30B-A3B-Instruct-GGUF/reso
 
 # Crear carpeta si no existe
 mkdir -p /models
-echo MODEL_URL
+
+
 if [ ! -f "$MODEL_PATH" ]; then
   echo "Descargando modelo..."
   curl -L --progress-bar -o "$MODEL_PATH" "$MODEL_URL"

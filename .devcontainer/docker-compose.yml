@@ -25,7 +25,7 @@ services:
       - NVIDIA_VISIBLE_DEVICES=all
     volumes:
       - models_data:/models
-      - ./docker-ia-entrypoint.sh:/usr/local/bin/docker-ia-entrypoint.sh:ro
+      - ./docker-ia-entrypoint.sh:/usr/local/bin/docker-ia-entrypoint.sh:ro   #En Volumen para hacer cambios sin tener que cosrecostruirlo
 
 volumes:
   models_data:
