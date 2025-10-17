@@ -7,7 +7,7 @@ app = FastAPI()
 # La URL interna de tu llama-server
 LLAMA_SERVER_URL = "http://localhost:8080/v1/completions"  # ajusta según tu endpoint real
 
-@app.post("/proxy")
+@app.post("/parser")
 async def proxy_to_ia(req: Request):
     body = await req.json()
     print("Incoming request to proxy:", body)

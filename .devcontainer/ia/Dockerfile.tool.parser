@@ -11,13 +11,13 @@ WORKDIR /app
 
 # Copiar dependencias y código
 COPY requirements.txt .
-
+COPY tool_parser.py .
 
 # Instalar requerimientos
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install -r requirements.txt
 
 # Exponer puerto del servidor FastAPI
 EXPOSE 8080
 
 # Comando de arranque
-CMD ["uvicorn", "tool_parser:app", "--host", "0.0.0.0", "--port", "8080", "--reload"]
+CMD ["uvicorn", "tool_parser:app", "--host", "0.0.0.0", "--port", "8080", "--reload","--reload-dir", "/app"]
