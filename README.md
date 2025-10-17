@@ -39,10 +39,16 @@ chmod +x ./docker-ia-entrypoint.sh
 
 ## 🧪 Construir el Dev Container
 
-Al abrir el proyecto en VSCode, selecciona una de las siguientes opciones:
+Al abrir el proyecto en VSCode, asegúrate de tener la paleta de comandos abierta presionando `F1`. Luego, ejecuta el comando "Dev Containers: Rebuild and Reopen in Container" para construir y abrir el entorno de desarrollo dentro del contenedor.
 
 - **Rebuild and Reopen in Container**: Construye la infraestructura inicial.
 - **Reopen in Container**: Abre el proyecto en el contenedor existente.
+
+Ten en cuenta que la descarga del modelo puede tomar varios minutos. Puedes monitorear el progreso ejecutando el siguiente comando en tu terminal:
+
+```bash
+    docker logs -f <nombre_carpeta>_devcontainer-ia-1
+```
 
 ## 📁 Estructura del Proyecto
 
