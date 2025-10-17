@@ -1,56 +1,55 @@
-# 🚀 Plantilla de Proyecto IA - DevContainer
+# 🚀 AI Project Template - DevContainer
 
-## 🌍 Descripción del Proyecto
+## 🌍 Project Description
 
-Esta plantilla está diseñada para facilitar el desarrollo de aplicaciones con agente inteligente local utilizando el modelo Qwen3-code, configurado para funcionar como agente a través de la extensión Continue en VSCode.
+This template is designed to facilitate the development of intelligent agent applications using the Qwen3-code model, configured to function as an agent via the Continue extension in VSCode.
 
-## 🚀 Requisitos previos
+## 🚀 Prerequisites
 
-Antes de comenzar, asegúrate de tener instalado:
-
+Before you start, make sure you have installed:
 - [Visual Studio Code](https://code.visualstudio.com/)
-- Extensión **Remote - Containers** en VSCode
-👉 [Instalar aquí](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-containers)
+- **Remote - Containers** extension in VSCode
+👉 [Install here](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-containers)
 - [Docker Desktop](https://www.docker.com/get-started/)
 
-## 🛠️ Instrucciones de uso
+## 🛠️ Usage Instructions
 
-### Paso 1: Crear un nuevo repositorio desde esta plantilla
+### Step 1: Create a new repository from this template
 
-Puedes crear un nuevo repositorio usando esta plantilla desde la consola con GitHub CLI:
+You can create a new repository using this template from the console with GitHub CLI:
 
 ```bash
-gh repo create mi-nuevo-repo --template imcrisam/template-devcontainer-qwen --public
+gh repo create my-new-repo --template imcrisam/template-devcontainer-qwen --public
 ```
 
-### Paso 2: Crear volumen para los modelos
+### Step 2: Create volume for models
 
 ```bash
 docker volume create models_data
 ```
 
-Este volumen se debe crear para guardar y reutilizar modelos.
+This volume must be created to store and reuse models.
 
-### Paso 3: Establecer permisos (si es necesario)
+### Step 3: Set permissions (if needed)
 
 ```bash
 chmod +x ./docker-ia-entrypoint.sh
 ```
 
-## 🧪 Construir el Dev Container
+## 🧪 Build the Dev Container
 
-Al abrir el proyecto en VSCode, asegúrate de tener la paleta de comandos abierta presionando `F1`. Luego, ejecuta el comando "Dev Containers: Rebuild and Reopen in Container" para construir y abrir el entorno de desarrollo dentro del contenedor.
+When opening the project in VSCode, make sure you have the command palette open by pressing `F1`. Then, execute the command "Dev Containers: Rebuild and Reopen in Container" to build and open the development environment within the container.
 
-- **Rebuild and Reopen in Container**: Construye la infraestructura inicial.
-- **Reopen in Container**: Abre el proyecto en el contenedor existente.
+- **Rebuild and Reopen in Container**: Builds the initial infrastructure.
+- **Reopen in Container**: Opens the project in the existing container.
 
-Ten en cuenta que la descarga del modelo puede tomar varios minutos. Puedes monitorear el progreso ejecutando el siguiente comando en tu terminal:
+Note that downloading the model may take several minutes. You can monitor the progress by running the following command in your terminal:
 
 ```bash
-    docker logs -f <nombre_carpeta>_devcontainer-ia-1
+    docker logs -f <folder_name>_devcontainer-ia-1
 ```
 
-## 📁 Estructura del Proyecto
+## 📁 Project Structure
 
 ```
 .
@@ -66,20 +65,20 @@ Ten en cuenta que la descarga del modelo puede tomar varios minutos. Puedes moni
 └── README.md
 ```
 
-### Descripción de archivos clave:
+### Key file descriptions:
 
-- **.continue/config.yaml**: Configuración de la extensión Continue para la conexión con la IA
-- **.devcontainer/devcontainer.json**: Configuración del VSCode y DevContainer
-- **.devcontainer/docker-compose.yml**: Configuración de servicios, volúmenes del modelo y IA dentro de Docker
-- **.devcontainer/docker-ia-entrypoint.sh**: Script para la gestión de descarga y ejecución del modelo
-- **.devcontainer/DockerFile**: Imagen base para el proyecto, puede ser modificada para diferentes dependencias
-- **.devcontainer/DockerFile.ia**: Imagen específica para la ejecución de la IA
-- **AGENTS.md**: Reglas principales del agente de IA
+- **.continue/config.yaml**: Configuration of the Continue extension for connection with the AI
+- **.devcontainer/devcontainer.json**: VSCode and DevContainer configuration
+- **.devcontainer/docker-compose.yml**: Services, model volumes and AI configuration within Docker
+- **.devcontainer/docker-ia-entrypoint.sh**: Script for model download and execution management
+- **.devcontainer/DockerFile**: Base image for the project, can be modified for different dependencies
+- **.devcontainer/DockerFile.ia**: Image specifically for AI execution
+- **AGENTS.md**: Main rules of the AI agent
 
-## 🤝 Contribuciones
+## 🤝 Contributions
 
-Las contribuciones son bienvenidas. Por favor, abre un issue o realiza un pull request.
+Contributions are welcome. Please open an issue or make a pull request.
 
-## 📄 Licencia
+## 📄 License
 
-Este proyecto está licenciado bajo la MIT License - mira el archivo [LICENSE](LICENSE) para más detalles.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.

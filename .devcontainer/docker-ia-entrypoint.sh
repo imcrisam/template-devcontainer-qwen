@@ -10,10 +10,10 @@ MODEL_URL="https://huggingface.co/unsloth/Qwen3-Coder-30B-A3B-Instruct-GGUF/reso
 mkdir -p /models
 
 if [ ! -f "$MODEL_PATH" ]; then
-  echo "Descargando modelo..."
+  echo "Downloading model..."
   curl -L --progress-bar -o "$MODEL_PATH" "$MODEL_URL"
 else
-  echo "Modelo ya existe en $MODEL_PATH"
+  echo "Model already exists at $MODEL_PATH"
 fi
 
 ./llama-server --list-devices
