@@ -5,13 +5,13 @@ services:
       dockerfile: Dockerfile
     volumes:
       - ..:/workspace:cached
+    networks:
+      - network_ia
 
-    command: sleep infinity
-    network_mode: service:ia
   ia:
     build:
       context: .
-      dockerfile: Dockerfile.ia
+      dockerfile: ia/Dockerfile.ia
     deploy:
       resources:
         reservations:
@@ -25,8 +25,24 @@ services:
       - NVIDIA_VISIBLE_DEVICES=all
     volumes:
       - models_data:/models
-      - ./docker-ia-entrypoint.sh:/usr/local/bin/docker-ia-entrypoint.sh:ro   #Volume para permitir configuraciones dinámicas en la IA sin necesidad de reconstruir la imagen
+      - ./ia/docker-ia-entrypoint.sh:/usr/local/bin/docker-ia-entrypoint.sh:ro   #Volume para permitir configuraciones dinámicas en la IA sin necesidad de reconstruir la imagen
+    networks:
+      - network_ia
+
+  tool_parser:
+    build: 
+      context: ./ia
+      dockerfile: Dockerfile.tool.parser
+    volumes:
+      - ./tool_parser.py:/app/tool_parser.py:ro   #Volume para permitir configuraciones dinámicas en la IA sin necesidad de reconstruir la imagen
+    networks:
+      - network_ia
+
 
 volumes:
   models_data:
     external: true
+
+networks:
+ network_ia:
+  driver: bridge

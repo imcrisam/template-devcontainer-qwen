@@ -26,17 +26,19 @@
   "isSupportedLanceDbCpuTargetForLinux": true,
   "sharedConfig": {
     "allowAnonymousTelemetry": false,
+    "disableSessionTitles": false,
     "readResponseTTS": false,
-    "useCurrentFileAsContext": true,
-    "enableExperimentalTools": true,
+    "useCurrentFileAsContext": false,
+    "enableExperimentalTools": false,
     "onlyUseSystemMessageTools": false,
-    "codebaseToolCallingOnly": false,
+    "codebaseToolCallingOnly": true,
     "showSessionTabs": true,
     "fontSize": 14,
     "codeWrap": true,
-    "displayRawMarkdown": false,
+    "displayRawMarkdown": true,
     "showChatScrollbar": true,
     "autoAcceptEditToolDiffs": true,
-    "continueAfterToolRejection": true
+    "continueAfterToolRejection": true,
+    "useAutocompleteMultilineCompletions": "always"
   }
 }

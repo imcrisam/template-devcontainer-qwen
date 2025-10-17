@@ -6,7 +6,6 @@ MODEL_NAME="Qwen3-Coder-30B-A3B-Instruct-Q3_K_M.gguf"
 MODEL_PATH="/models/$MODEL_NAME"
 MODEL_URL="https://huggingface.co/unsloth/Qwen3-Coder-30B-A3B-Instruct-GGUF/resolve/main/$MODEL_NAME"
 
-
 mkdir -p /models
 
 if [ ! -f "$MODEL_PATH" ]; then
@@ -21,11 +20,14 @@ fi
 exec ./llama-server \
   --model "$MODEL_PATH" \
   -v \
+  --temp 0.7     --min-p 0.0     --top-p 0.8     --top-k 20 \
+  --presence-penalty 1.05 \
+  --threads -1 \
   --flash-attn auto \
-  --fim-qwen-30b-default \
-  --ctx-size 15000 \
   --jinja \
+  --fim-qwen-30b-default \
   --no-mmap \
+  --ctx-size 15000 \
   --n-gpu-layers 48 \
   --n-predict 1014 \
   --verbose-prompt \
