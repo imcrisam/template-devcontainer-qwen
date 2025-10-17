@@ -1,0 +1,42 @@
+{
+  "lastSelectedProfileForWorkspace": {
+    "file:///workspace:::personal": "local",
+    "file:///root/.continue:::personal": "local",
+    "file:///:::personal": "local"
+  },
+  "lastSelectedOrgIdForWorkspace": {
+    "file:///workspace": "personal",
+    "file:///root/.continue": "personal",
+    "file:///": "personal"
+  },
+  "shownDeprecatedProviderWarnings": {
+    "clipboard": true
+  },
+  "selectedModelsByProfileId": {
+    "local": {
+      "chat": "Qwen3-Coder-30B-A3B-Instruct",
+      "edit": "Qwen3-Coder-30B-A3B-Instruct",
+      "apply": "Qwen3-Coder-30B-A3B-Instruct",
+      "embed": "Transformers.js (Built-In)",
+      "autocomplete": null,
+      "rerank": null,
+      "summarize": null
+    }
+  },
+  "isSupportedLanceDbCpuTargetForLinux": true,
+  "sharedConfig": {
+    "allowAnonymousTelemetry": false,
+    "readResponseTTS": false,
+    "useCurrentFileAsContext": true,
+    "enableExperimentalTools": true,
+    "onlyUseSystemMessageTools": false,
+    "codebaseToolCallingOnly": false,
+    "showSessionTabs": true,
+    "fontSize": 14,
+    "codeWrap": true,
+    "displayRawMarkdown": false,
+    "showChatScrollbar": true,
+    "autoAcceptEditToolDiffs": true,
+    "continueAfterToolRejection": true
+  }
+}

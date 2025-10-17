@@ -9,6 +9,7 @@ models:
     completionType: completion
     capabilities:
       - tool_use
+      - next_edit
     streaming: true
     roles:
       - chat
