@@ -5,11 +5,11 @@ models:
   - name: Qwen3-Coder-30B-A3B-Instruct
     provider: openai
     model: Qwen3-Coder-30B-A3B-Instruct
-    apiBase: http://tool_parser:8080/parser
+    apiBase: http://tool_parser:8080/
     completionType: completion
     capabilities:
       - tool_use
-      # - next_edit
+      - next_edit
     streaming: true
     roles:
       - chat
