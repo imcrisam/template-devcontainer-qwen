@@ -10,8 +10,8 @@ RUN apt-get update && \
 WORKDIR /app
 
 # Copiar dependencias y código
-COPY requirements.txt .
-COPY tool_parser.py .
+COPY ia/requirements.txt .
+# COPY tool_parser.py .
 
 # Instalar requerimientos
 RUN pip install -r requirements.txt

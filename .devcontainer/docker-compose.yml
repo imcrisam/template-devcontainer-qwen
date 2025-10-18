@@ -31,10 +31,10 @@ services:
 
   tool_parser:
     build:
-      context: ./ia
-      dockerfile: Dockerfile.tool.parser
-    # volumes:
-      # - ./tool_parser.py:/app/tool_parser.py:ro   #Volume para permitir configuraciones dinámicas en la IA sin necesidad de reconstruir la imagen
+      context: .
+      dockerfile: ia/Dockerfile.tool.parser
+    volumes:
+      - ./ia/tool_parser.py:/app/tool_parser.py:ro   #Volume para permitir configuraciones dinámicas en la proxy sin necesidad de reconstruir la imagen
     networks:
       - network_ia
 
