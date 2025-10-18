@@ -15,17 +15,35 @@ else
   echo "Model already exists at $MODEL_PATH"
 fi
 
+TEMPLATE_PATH="/models/chat_template.jinja"
+TEMPLATE_URL="https://huggingface.co/unsloth/Qwen3-Coder-30B-A3B-Instruct-GGUF/resolve/main/template"
+
+if [ ! -f "$TEMPLATE_PATH" ]; then
+  echo "Downloading chat template..."
+  curl -L --progress-bar -o "$TEMPLATE_PATH" "$TEMPLATE_URL"
+else
+  echo "Chat template already exists at $TEMPLATE_PATH"
+fi
+
+PARAMS_PATH="/models/chat_params.json"
+PARAMS_URL="https://huggingface.co/unsloth/Qwen3-Coder-30B-A3B-Instruct-GGUF/resolve/main/params"
+
+if [ ! -f "$PARAMS_PATH" ]; then
+  echo "Downloading chat params..."
+  curl -L --progress-bar -o "$PARAMS_PATH" "$PARAMS_URL"
+else
+  echo "Chat params already exist at $PARAMS_PATH"
+fi
+
 ./llama-server --list-devices
 
 exec ./llama-server \
   --model "$MODEL_PATH" \
   -v \
-  --temp 0.7     --min-p 0.0     --top-p 0.8     --top-k 20 \
-  --presence-penalty 1.05 \
   --threads -1 \
-  --flash-attn auto \
+  --chat-template-file "$TEMPLATE_PATH"\
+  --chat-template-kwargs "$(cat $PARAMS_PATH)"\
   --jinja \
-  --fim-qwen-30b-default \
   --no-mmap \
   --ctx-size 15000 \
   --n-gpu-layers 48 \
@@ -34,6 +52,7 @@ exec ./llama-server \
   --port 8080 \
   --host 0.0.0.0
 
+  # --flash-attn auto \
 
 # --ctx-size 15000 (un valor más alto mejora la calidad de los resultados, pero requiere más memoria VRAM y RAM)
 # --n-gpu-layers 48 (un valor más alto utiliza más VRAM, pero ofrece mejor rendimiento; un valor más bajo consume menos VRAM, pero puede requerir más RAM)

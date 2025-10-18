@@ -11,7 +11,7 @@ services:
   ia:
     build:
       context: .
-      dockerfile: ia/Dockerfile.ia
+      dockerfile: Dockerfile.ia
     deploy:
       resources:
         reservations:
@@ -25,16 +25,7 @@ services:
       - NVIDIA_VISIBLE_DEVICES=all
     volumes:
       - models_data:/models
-      - ./ia/docker-ia-entrypoint.sh:/usr/local/bin/docker-ia-entrypoint.sh:ro   #Volume para permitir configuraciones dinámicas en la IA sin necesidad de reconstruir la imagen
-    networks:
-      - network_ia
-
-  tool_parser:
-    build:
-      context: .
-      dockerfile: ia/Dockerfile.tool.parser
-    volumes:
-      - ./ia/tool_parser.py:/app/tool_parser.py:ro   #Volume para permitir configuraciones dinámicas en la proxy sin necesidad de reconstruir la imagen
+      - ./docker-ia-entrypoint.sh:/usr/local/bin/docker-ia-entrypoint.sh:ro   #Volume para permitir configuraciones dinámicas en la IA sin necesidad de reconstruir la imagen
     networks:
       - network_ia
 
