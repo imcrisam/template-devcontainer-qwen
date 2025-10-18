@@ -1,7 +1,8 @@
 #!/bin/bash
 set -e
 
-MODEL_NAME="Qwen3-Coder-30B-A3B-Instruct-Q3_K_M.gguf"
+# MODEL_NAME="Qwen3-Coder-30B-A3B-Instruct-Q3_K_M.gguf"
+MODEL_NAME="Qwen3-Coder-30B-A3B-Instruct-UD-IQ3_XXS.gguf" #max context 262144
 
 MODEL_PATH="/models/$MODEL_NAME"
 MODEL_URL="https://huggingface.co/unsloth/Qwen3-Coder-30B-A3B-Instruct-GGUF/resolve/main/$MODEL_NAME"
@@ -35,27 +36,25 @@ else
   echo "Chat params already exist at $PARAMS_PATH"
 fi
 
-./llama-server --list-devices
-
 exec ./llama-server \
   --model "$MODEL_PATH" \
   -v \
-  --threads -1 \
-  --chat-template-file "$TEMPLATE_PATH"\
-  --chat-template-kwargs "$(cat $PARAMS_PATH)"\
-  --jinja \
-  --no-mmap \
-  --ctx-size 15000 \
-  --n-gpu-layers 48 \
-  --n-predict 1014 \
-  --verbose-prompt \
   --port 8080 \
-  --host 0.0.0.0
+  --host 0.0.0.0\
+  --ctx-size 15000\
+  --n-gpu-layers 44 \
+  --n-predict 1014 \
+  --threads -1 \
+  --flash-attn auto \
+  --verbose-prompt \
+  --jinja \
+  --no-mmap
+  # --chat-template-kwargs "$(cat $PARAMS_PATH)"\
+  # --chat-template-file "$TEMPLATE_PATH"\
+  # --fim-qwen-30b-default
+  # --top-p 0.7 \
+  # --temp 0.5 \
+  # --top-k 40 \
+  # --min-p 0.05 \
+  # --repeat-penalty 1.15 \
 
-  # --flash-attn auto \
-
-# --ctx-size 15000 (un valor más alto mejora la calidad de los resultados, pero requiere más memoria VRAM y RAM)
-# --n-gpu-layers 48 (un valor más alto utiliza más VRAM, pero ofrece mejor rendimiento; un valor más bajo consume menos VRAM, pero puede requerir más RAM)
-
-# --ctx-size 15000 (a higher value improves result quality but requires more VRAM and RAM)
-# --n-gpu-layers 48 (a higher value uses more VRAM but offers better performance; a lower value consumes less VRAM but may require more RAM)

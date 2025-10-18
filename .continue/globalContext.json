@@ -19,7 +19,7 @@
       "apply": "Qwen3-Coder-30B-A3B-Instruct",
       "embed": "Transformers.js (Built-In)",
       "autocomplete": null,
-      "rerank": null,
+      "rerank": "Qwen3-Coder-30B-A3B-Instruct",
       "summarize": null
     }
   },
@@ -29,9 +29,9 @@
     "disableSessionTitles": false,
     "readResponseTTS": false,
     "useCurrentFileAsContext": false,
-    "enableExperimentalTools": false,
+    "enableExperimentalTools": true,
     "onlyUseSystemMessageTools": false,
-    "codebaseToolCallingOnly": true,
+    "codebaseToolCallingOnly": false,
     "showSessionTabs": true,
     "fontSize": 14,
     "codeWrap": true,
