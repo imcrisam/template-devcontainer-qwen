@@ -66,6 +66,12 @@ Ten en cuenta que la descarga del modelo puede tomar varios minutos. Puedes moni
 └── README.md
 ```
 
+configuracion recomendada de .continue/globalcontext.json
+
+"codebaseToolCallingOnly": true,
+"continueAfterToolRejection": true,
+
+
 ### Descripción de archivos clave:
 
 - **.continue/config.yaml**: Configuración de la extensión Continue para la conexión con la IA

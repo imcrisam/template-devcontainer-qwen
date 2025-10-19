@@ -2,7 +2,8 @@
 set -e
 
 # MODEL_NAME="Qwen3-Coder-30B-A3B-Instruct-Q3_K_M.gguf"
-MODEL_NAME="Qwen3-Coder-30B-A3B-Instruct-UD-IQ3_XXS.gguf" #max context 262144
+# MODEL_NAME="Qwen3-Coder-30B-A3B-Instruct-UD-IQ3_XXS.gguf" #max context 262144
+MODEL_NAME="Qwen3-Coder-30B-A3B-Instruct-UD-IQ1_S.gguf" #max context 262144
 
 MODEL_PATH="/models/$MODEL_NAME"
 MODEL_URL="https://huggingface.co/unsloth/Qwen3-Coder-30B-A3B-Instruct-GGUF/resolve/main/$MODEL_NAME"
@@ -41,16 +42,16 @@ exec ./llama-server \
   -v \
   --port 8080 \
   --host 0.0.0.0\
-  --ctx-size 15000\
-  --n-gpu-layers 44 \
+  --ctx-size 100000\
+  --n-gpu-layers 56 \
   --n-predict 1014 \
   --threads -1 \
-  --flash-attn auto \
   --verbose-prompt \
+  --flash-attn auto \
   --jinja \
   --no-mmap
-  # --chat-template-kwargs "$(cat $PARAMS_PATH)"\
   # --chat-template-file "$TEMPLATE_PATH"\
+  # --chat-template-kwargs "$(cat $PARAMS_PATH)"\
   # --fim-qwen-30b-default
   # --top-p 0.7 \
   # --temp 0.5 \
