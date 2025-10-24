@@ -5,6 +5,9 @@ services:
       dockerfile: Dockerfile
     volumes:
       - ..:/workspace:cached
+      - models_data:/models
+    depends_on:
+      - ia
     networks:
       - network_ia
 

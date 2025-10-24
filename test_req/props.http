@@ -1,0 +1,28 @@
+### Obtener documentación del servidor
+GET http://ia:8080/v1/models
+Accept: application/json
+
+### Obtener documentación del servidor
+GET http://ia:8080/docs
+Accept: application/json
+
+### Obtener propiedades del servidor
+GET http://ia:8080/props
+Accept: application/json
+
+### 
+POST  http://ia:8080/props
+Accept: application/json
+
+{
+    "chat_format": "GPT-OSS"
+} 
+###
+POST  http://ia:8080/props
+Accept: application/json
+
+{"default_generation_settings": {
+  "params": {
+    "chat_format": "Tool-calls"
+  }
+}}

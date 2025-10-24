@@ -5,16 +5,19 @@ models:
   - name: Qwen3-Coder-30B-A3B-Instruct
     provider: openai
     model: Qwen3-Coder-30B-A3B-Instruct
-    apiBase: http://ia:8080/
-    completionType: completion
+    apiBase: http://ia:8080/v1
+    # completionType: completion
+    chatOptions:
+      baseSystemMessage: "You are a helpful coding agent."
+      baseAgentSystemMessage: "You are a systematic coding agent. Break down problems methodically."
+      basePlanSystemMessage: "You are a planning agent. Create clear, actionable steps."
+    maxStopWords: 3000
     capabilities:
       - tool_use
-    streaming: true
     roles:
-      - chat
-      - rerank
-      - edit
       - apply
+      - chat
+      - edit
 
 context:
   - provider: file
@@ -40,3 +43,4 @@ context:
   - provider: docs
   - provider: folder
   - provider: codebase
+

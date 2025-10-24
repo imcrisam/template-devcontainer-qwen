@@ -19,26 +19,27 @@
       "apply": "Qwen3-Coder-30B-A3B-Instruct",
       "embed": "Transformers.js (Built-In)",
       "autocomplete": null,
-      "rerank": "Qwen3-Coder-30B-A3B-Instruct",
+      "rerank": null,
       "summarize": null
     }
   },
   "isSupportedLanceDbCpuTargetForLinux": true,
   "sharedConfig": {
     "allowAnonymousTelemetry": true,
+    "disableIndexing": true,
     "disableSessionTitles": true,
     "readResponseTTS": false,
     "useCurrentFileAsContext": false,
     "enableExperimentalTools": false,
     "onlyUseSystemMessageTools": false,
-    "codebaseToolCallingOnly": true,
+    "codebaseToolCallingOnly": false,
     "showSessionTabs": true,
     "fontSize": 14,
-    "codeWrap": true,
+    "codeWrap": false,
     "displayRawMarkdown": false,
     "showChatScrollbar": true,
     "autoAcceptEditToolDiffs": true,
-    "continueAfterToolRejection": true,
+    "continueAfterToolRejection": false,
     "useAutocompleteMultilineCompletions": "always"
   }
 }

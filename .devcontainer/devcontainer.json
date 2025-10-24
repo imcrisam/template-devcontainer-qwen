@@ -37,13 +37,17 @@
                 "dbaeumer.vscode-eslint",
                 "shd101wyy.markdown-preview-enhanced",
                 // IA
-                "Continue.continue"
+                "Continue.continue",
+                "wholroyd.jinja",
+                "samuelcolvin.jinjahtml",
+                "humao.rest-client"
             ]
         },
         "settings": {
             "workbench.colorTheme": "Default Dark Modern",
             "editor.defaultFormatter": "esbenp.prettier-vscode",
             "material-icon-theme.enableLogging": true
+            // "continue.logging": "debug"
         }
     },
     "forwardPorts": [

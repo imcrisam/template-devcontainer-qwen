@@ -1,6 +1,10 @@
 
-FROM ghcr.io/ggml-org/llama.cpp:server-cuda
+FROM ghcr.io/ggml-org/llama.cpp:server-cuda-b6795
+
+COPY ./templates .
 
 EXPOSE 8080
+
+
 
 ENTRYPOINT ["/usr/local/bin/docker-ia-entrypoint.sh"]
