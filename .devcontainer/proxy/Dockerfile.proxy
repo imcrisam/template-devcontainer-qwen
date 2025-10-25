@@ -1,0 +1,31 @@
+# Dockerfile
+FROM python:3.11-slim
+
+# Variables de entorno por defecto
+ENV TARGET_URL=http://ai:8080 \
+    PROXY_HOST=0.0.0.0 \
+    PROXY_PORT=8080 \
+    PROXY_LOG_FILE=/logs/proxy.log \
+    MAX_LOG_BYTES=2000000 \
+    LOG_BACKUPS=5 \
+    MAX_BODY_LOG=10000
+
+# Crear carpeta de logs y app
+WORKDIR /app
+RUN mkdir -p /logs
+
+# # Copiar código
+# COPY server.py .
+
+# Instalar dependencias
+RUN pip install --no-cache-dir flask requests
+
+# Usuario no root
+RUN useradd -m proxyuser
+USER proxyuser
+
+# Exponer puerto
+EXPOSE 8080
+
+# Comando por defecto
+CMD ["python", "server.py"]

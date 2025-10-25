@@ -6,15 +6,24 @@ services:
     volumes:
       - ..:/workspace:cached
       - models_data:/models
-    depends_on:
-      - ia
     networks:
-      - network_ia
+      - network_ai
 
-  ia:
+  proxy:
     build:
-      context: .
-      dockerfile: Dockerfile.ia
+      context: ./proxy
+      dockerfile: ./Dockerfile.proxy
+    volumes:
+      - ./logs:/logs
+      - ./proxy/server.py:/app/server.py
+    networks:
+      - network_ai
+
+
+  ai:
+    build:
+      context: ./ai
+      dockerfile: ./Dockerfile.ai
     deploy:
       resources:
         reservations:
@@ -28,9 +37,9 @@ services:
       - NVIDIA_VISIBLE_DEVICES=all
     volumes:
       - models_data:/models
-      - ./docker-ia-entrypoint.sh:/usr/local/bin/docker-ia-entrypoint.sh:ro   #Volume para permitir configuraciones dinámicas en la IA sin necesidad de reconstruir la imagen
+      - ./ai/docker-ai-entrypoint.sh:/usr/local/bin/docker-ai-entrypoint.sh:ro   #Volume para permitir configuraciones dinámicas en la IA sin necesidad de reconstruir la imagen
     networks:
-      - network_ia
+      - network_ai
 
 
 volumes:
@@ -38,5 +47,5 @@ volumes:
     external: true
 
 networks:
- network_ia:
+ network_ai:
   driver: bridge

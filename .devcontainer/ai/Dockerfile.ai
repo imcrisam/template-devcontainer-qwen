@@ -1,0 +1,10 @@
+
+FROM ghcr.io/ggml-org/llama.cpp:server-cuda-b6830
+
+COPY ./templates .
+
+EXPOSE 8080
+
+
+
+ENTRYPOINT ["/usr/local/bin/docker-ai-entrypoint.sh"]
