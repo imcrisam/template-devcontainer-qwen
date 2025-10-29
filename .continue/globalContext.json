@@ -15,8 +15,8 @@
   "selectedModelsByProfileId": {
     "local": {
       "chat": "Qwen3-Coder-30B-A3B-Instruct",
-      "edit": "Qwen3-Coder-30B-A3B-Instruct",
-      "apply": "Qwen3-Coder-30B-A3B-Instruct",
+      "edit": "openrouter:openai/gpt-oss-20b:free",
+      "apply": "openrouter:openai/gpt-oss-20b:free",
       "embed": "Transformers.js (Built-In)",
       "autocomplete": null,
       "rerank": null,

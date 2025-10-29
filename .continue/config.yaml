@@ -18,6 +18,23 @@ models:
       - chat
       - edit
 
+  - name: openrouter:openai/gpt-oss-20b:free
+    provider: openai
+    model: openai/gpt-oss-20b:free
+    apiBase: http://proxy:8080/v1
+    apiKey: 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
+    stream: false
+    chatOptions:
+      baseSystemMessage: "You are a helpful coding agent."
+      baseAgentSystemMessage: "eres un agente"
+      basePlanSystemMessage: "You are a planning agent. Create clear, actionable steps."
+    capabilities:
+      - tool_use
+    roles:
+      - apply
+      - chat
+      - edit
+
 context:
   - provider: file
   - provider: code

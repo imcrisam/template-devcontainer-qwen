@@ -12,17 +12,25 @@ Accept: application/json
 
 ### 
 POST  http://ia:8080/props
-Accept: application/json
+Content-Type: application/json
 
 {
     "chat_format": "GPT-OSS"
 } 
 ###
-POST  http://ia:8080/props
-Accept: application/json
 
-{"default_generation_settings": {
+###
+POST  http://ia:8080/props
+Content-Type: application/json
+
+{
+  "default_generation_settings": {
   "params": {
     "chat_format": "Tool-calls"
   }
-}}
+  }
+}
+
+# Archivo props.http
+Este archivo contiene propiedades HTTP necesarias para la ejecución del ambiente de prueba.
+Contiene configuraciones y valores específicos requeridos por el sistema durante las pruebas.

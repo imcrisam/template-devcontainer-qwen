@@ -1,4 +1,6 @@
-{# Copyright 2025-present Unsloth. Apache 2.0 License. Unsloth Chat template fixes #}
+{# SPDX-License-Identifier: Apache-2.0 #}
+{# Copyright 2025-present the Unsloth team. All rights reserved. #}
+
 {% macro render_item_list(item_list, tag_name='required') %}
     {%- if item_list is defined and item_list is iterable and item_list | length > 0 %}
         {%- if tag_name %}{{- '\n<' ~ tag_name ~ '>' -}}{% endif %}
@@ -55,13 +57,13 @@
             {%- endif %}
             {{- render_item_list(param_fields.enum, 'enum') }}
             {%- set handled_keys = ['type', 'description', 'enum', 'required'] %}
-            {%- for json_key, json_value in param_fields|items %}
+            {%- for json_key in param_fields %}
                 {%- if json_key not in handled_keys %}
-                    {%- set normed_json_key = json_key|string %}
-                    {%- if json_value is mapping %}
-                        {{- '\n<' ~ normed_json_key ~ '>' ~ (json_value | tojson | safe) ~ '</' ~ normed_json_key ~ '>' }}
+		    {%- set normed_json_key = json_key %}
+                    {%- if param_fields[json_key] is mapping %}
+                        {{- '\n<' ~ normed_json_key ~ '>' ~ (param_fields[json_key] | tojson | safe) ~ '</' ~ normed_json_key ~ '>' }}
                     {%- else %}
-                        {{- '\n<' ~ normed_json_key ~ '>' ~ (json_value | string) ~ '</' ~ normed_json_key ~ '>' }}
+                        {{- '\n<' ~ normed_json_key ~ '>' ~ (param_fields[json_key] | string) ~ '</' ~ normed_json_key ~ '>' }}
                     {%- endif %}
                 {%- endif %}
             {%- endfor %}
@@ -80,15 +82,12 @@
         {{- '\n</function>' }}
     {%- endfor %}
     {{- "\n</tools>" }}
-    {{- '\n\nIf you choose to call a function ONLY reply in the following format with NO suffix:\n\n<tool_call>\n<function=example_function_name>\n<parameter=example_parameter_1>\nvalue_1\n</parameter>\n<parameter=example_parameter_2>\nThis is the value for the second parameter\nthat can span\nmultiple lines\n</parameter>\n</function>\n</tool_call>\n\n<IMPORTANT>\nReminder:\n- Function calls MUST follow the specified format: an inner <function=...></function> block must be nested within <tool_call></tool_call> XML tags\n- Required parameters MUST be specified\n- You may provide optional reasoning for your function call in natural language BEFORE the function call, but NOT after\n- If there is no function call available, answer the question like normal with your current knowledge and do not tell the user about function calls\n</IMPORTANT>' }}
+    {{- '\n\nIf you choose to call a function ONLY reply in the following format:\n\n<tool_call>\n<function=example_function_name>\n<parameter=example_parameter_1>\nvalue_1\n</parameter>\n<parameter=example_parameter_2>\nvalue_2\n</parameter>\n</function>\n</tool_call>\n\n<IMPORTANT>\nReminder:\n- Use only the above XML format with correct tag nesting.\n- `function=` tag must appear exactly like shown.\n- Each parameter must have opening and closing tags.\n- Multiline values are supported inside <parameter>...</parameter>.\n- No trailing output or suffix allowed after </tool_call>.\n</IMPORTANT>' }}
 {%- endif %}
-{%- if system_message is defined %}
+{%- if system_message is defined or (tools is iterable and tools | length > 0) %}
     {{- '<|im_end|>\n' }}
-{%- else %}
-    {%- if tools is iterable and tools | length > 0 %}
-        {{- '<|im_end|>\n' }}
-    {%- endif %}
 {%- endif %}
+
 {%- for message in loop_messages %}
     {%- if message.role == "assistant" and message.tool_calls is defined and message.tool_calls is iterable and message.tool_calls | length > 0 %}
         {{- '<|im_start|>' + message.role }}
@@ -111,8 +110,8 @@
             {{- '</function>\n</tool_call>' }}
         {%- endfor %}
         {{- '<|im_end|>\n' }}
-    {%- elif message.role == "user" or message.role == "system" or message.role == "assistant" %}
-        {{- '<|im_start|>' + message.role + '\n' + message.content + '<|im_end|>' + '\n' }}
+    {%- elif message.role in ["user", "system", "assistant"] %}
+        {{- '<|im_start|>' + message.role + '\n' + message.content + '<|im_end|>\n' }}
     {%- elif message.role == "tool" %}
         {%- if loop.previtem and loop.previtem.role != "tool" %}
             {{- '<|im_start|>user\n' }}
@@ -129,7 +128,7 @@
         {{- '<|im_start|>' + message.role + '\n' + message.content + '<|im_end|>\n' }}
     {%- endif %}
 {%- endfor %}
+
 {%- if add_generation_prompt %}
     {{- '<|im_start|>assistant\n' }}
 {%- endif %}
-{# Copyright 2025-present Unsloth. Apache 2.0 License. Unsloth Chat template fixes #}

@@ -50,9 +50,8 @@ exec ./llama-server \
   --temp 0.7 --min-p 0.01 --top-p 0.8 --top-k 20 --presence-penalty 1.05 \
   --repeat-penalty 1.25 \
   --jinja \
-  --chat-template-file "qwen3_code_origin_450isus.jinja" \
+  --chat-template-file "qwen3_code_15012.jinja" \
   --host 0.0.0.0 --port 8080
-  # --hf_template \
   # --chat-template qwen2 \
   # --no-mmap \
   # --verbose-prompt \
