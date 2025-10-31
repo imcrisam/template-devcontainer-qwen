@@ -19,7 +19,8 @@ Before you start, make sure you have installed:
 You can create a new repository using this template from the console with GitHub CLI:
 
 ```bash
-gh repo create my-new-repo --template imcrisam/template-devcontainer-qwen --public
+gh repo create my-new-repo --template imcrisam/template-devcontainer-qwen --public && code my-new-repo
+
 ```
 
 ### Step 2: Create volume for models
@@ -74,15 +75,6 @@ Note that downloading the model may take several minutes. You can monitor the pr
 
 ```
 
-### Key file descriptions:
-
-- **.continue/config.yaml**: Configuration of the Continue extension for connection with the AI
-- **.devcontainer/devcontainer.json**: VSCode and DevContainer configuration
-- **.devcontainer/docker-compose.yml**: Services, model volumes and AI configuration within Docker
-- **.devcontainer/docker-ia-entrypoint.sh**: Script for model download and execution management
-- **.devcontainer/DockerFile**: Base image for the project, can be modified for different dependencies
-- **.devcontainer/DockerFile.ia**: Image specifically for AI execution
-- **AGENTS.md**: Main rules of the AI agent
 
 ## 🤝 Contributions
 
