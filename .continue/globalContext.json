@@ -15,8 +15,8 @@
   "selectedModelsByProfileId": {
     "local": {
       "chat": "Qwen3-Coder-30B-A3B-Instruct",
-      "edit": "openrouter:openai/gpt-oss-20b:free",
-      "apply": "openrouter:openai/gpt-oss-20b:free",
+      "edit": "Qwen3-Coder-30B-A3B-Instruct",
+      "apply": "Qwen3-Coder-30B-A3B-Instruct",
       "embed": "Transformers.js (Built-In)",
       "autocomplete": null,
       "rerank": null,
@@ -35,7 +35,7 @@
     "codebaseToolCallingOnly": false,
     "showSessionTabs": true,
     "fontSize": 14,
-    "codeWrap": false,
+    "codeWrap": true,
     "displayRawMarkdown": false,
     "showChatScrollbar": true,
     "autoAcceptEditToolDiffs": true,

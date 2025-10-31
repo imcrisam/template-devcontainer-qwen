@@ -36,15 +36,16 @@ app = Flask(__name__)
 # Guarda fragmentos por id
 _response_accumulator = defaultdict(str)
 
-def parse_stream(lines):
+def parse_stream(resp):
     result = {
         "contents": [],
         "tools": defaultdict(lambda: {"arguments": ""})
     }
+    logger.info("◀ [RESPONSE] Status: %s", resp.status_code)
 
     current_content = ""
     current_tool = None
-
+    lines = resp.iter_lines()
     for raw in lines:
         # logger.debug(f"RAW LINE: {raw!r}")
         if isinstance(raw, bytes):
@@ -114,11 +115,24 @@ def _pretty_json_or_text(data: bytes) -> str:
     except json.JSONDecodeError:
         return text.strip()
 
+LOG_EXCLUDE_KEYS = ["tools"]
 def _log_request(body, req):
     _response_accumulator = defaultdict(str)
     logger.info("▶ [REQUEST] %s %s%s", req.method, req.path, f"?{req.query_string.decode()}" if req.query_string else "")
     logger.debug("- Headers:\n%s", json.dumps(dict(req.headers), indent=2, ensure_ascii=False))
-    logger.debug("- Body:\n%s\n%s", _pretty_json_or_text(body), "-" * 80)
+        # Si el body es JSON, eliminamos las claves excluidas antes de imprimir
+    try:
+        body_json = json.loads(body)
+        if isinstance(body_json, dict):
+            for key in LOG_EXCLUDE_KEYS:
+                body_json.pop(key, None)
+            body_to_log = json.dumps(body_json, indent=2, ensure_ascii=False)
+        else:
+            body_to_log = _pretty_json_or_text(body)
+    except Exception:
+        body_to_log = _pretty_json_or_text(body)
+
+    logger.debug("- Body:\n%s\n%s", body_to_log, "-" * 80)
 
 def _log_response(resp):
     logger.info("◀ [RESPONSE] Status: %s", resp.status_code)
@@ -129,7 +143,7 @@ def _add_tool_choice_to_body(body: bytes) -> bytes:
     try:
         data = json.loads(body)
         if isinstance(data, dict) and "tool_choice" not in data:
-            data["tool_choice"] = "auto"
+            data["tool_choice"] = "required"
             return json.dumps(data).encode("utf-8")
     except Exception:
         pass
@@ -165,7 +179,7 @@ def proxy(path):
         return Response(f"Upstream request failed: {e}", status=502)
 
     # _log_response(resp)
-    parse_stream(resp.iter_lines())
+    parse_stream(resp)
     excluded_resp_headers = {"content-encoding", "transfer-encoding", "connection", "keep-alive"}
     response_headers = [(n, v) for n, v in resp.headers.items() if n.lower() not in excluded_resp_headers]
 

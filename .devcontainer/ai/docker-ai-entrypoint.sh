@@ -40,26 +40,18 @@ fi
 exec ./llama-server \
   --model "$MODEL_PATH" \
   -v \
-  --ctx-size 32000 \
+  --ctx-size 48000 \
   --n-gpu-layers 56 \
-  --n-predict 1014 \
   --threads -1 \
   --flash-attn auto \
-  --cache-ram 0 \
   --props \
   --temp 0.7 --min-p 0.01 --top-p 0.8 --top-k 20 --presence-penalty 1.05 \
   --repeat-penalty 1.25 \
   --jinja \
   --chat-template-file "qwen3_code_15012.jinja" \
+  --cache-ram 0 \
   --host 0.0.0.0 --port 8080
-  # --chat-template qwen2 \
-  # --no-mmap \
   # --verbose-prompt \
-  # --top-p 0.7 \
-  # --temp 0.5 \
-  # --top-k 40 \
-  # --min-p 0.05 \
-  # --fim-qwen-30b-default \
-  # --chat-template-file "$TEMPLATE_PATH"\
-  # --fim-qwen-30b-default
+  # --n-predict 1014 \
+  # --no-mmap \
 

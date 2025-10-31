@@ -14,7 +14,7 @@ services:
       context: ./proxy
       dockerfile: ./Dockerfile.proxy
     volumes:
-      - ./logs:/logs
+      - ./proxy/logs:/logs
       - ./proxy/server.py:/app/server.py
     networks:
       - network_ai

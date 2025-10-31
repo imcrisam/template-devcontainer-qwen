@@ -20,8 +20,8 @@ RUN mkdir -p /logs
 RUN pip install --no-cache-dir flask requests
 
 # Usuario no root
-RUN useradd -m proxyuser
-USER proxyuser
+# RUN useradd -m proxyuser
+# USER proxyuser
 
 # Exponer puerto
 EXPOSE 8080
